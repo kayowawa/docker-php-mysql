@@ -31,17 +31,17 @@ services:
       - ./.docker/db/data:/var/lib/mysql
       - ./.docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
-      MYSQL_ROOT_PASSWORD: 
-      MYSQL_DATABASE: 
-      MYSQL_USER: 
-      MYSQL_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
 
-  # phpmyadmin:
-  #   image: phpmyadmin/phpmyadmin
-  #   environment:
-  #     - PMA_ARBITRARY=1
-  #     - PMA_HOSTS=
-  #     - PMA_USER=
-  #     - PMA_PASSWORD=
-  #   ports:
-  #     - 8085:80
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=db
+      - PMA_USER=user
+      - PMA_PASSWORD=pass
+    ports:
+      - 8085:80
