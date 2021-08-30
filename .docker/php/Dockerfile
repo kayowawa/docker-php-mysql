@@ -28,6 +28,8 @@ RUN docker-php-ext-install mbstring && \
 
 RUN apk add git libzip-dev
 RUN docker-php-ext-install pdo_mysql zip
+# RUN apk add --no-cache nodejs
+
 
 # RUN a2enmod rewrite
 
@@ -43,7 +45,12 @@ RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     chmod +x /usr/local/bin/composer
 
-RUN composer create-project --prefer-dist "laravel/laravel=8.*" .
+RUN apk add --no-cache --virtual curl gnupg
+RUN curl -sL https://deb.nodesource.com/setup_11.x | sh -
+RUN apk add --no-cache nodejs
+
+
+#RUN composer create-project --prefer-dist "laravel/laravel=8.*" .
 # RUN a2enmod rewrite
 
 WORKDIR /var/www/html
